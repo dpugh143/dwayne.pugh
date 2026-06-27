@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>404 — Not Found | Dwayne Pugh</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!--
+    Styles are inlined because GitHub Pages serves 404.html at the repo root
+    regardless of the requested URL depth — relative CSS paths would break
+    on paths like /dwayne.pugh/assets/missing-file.pdf.
+  -->
+  <style>
+    :root {
+      --color-bg-base:      #0A0A0A;
+      --color-bg-surface:   #111111;
+      --color-bg-elevated:  #181818;
+      --color-gold:         #C8860A;
+      --color-gold-dim:     #8A5C07;
+      --color-gold-glow:    rgba(200, 134, 10, 0.15);
+      --color-green:        #2D6A4F;
+      --color-text-primary: #E8E6E0;
+      --color-text-secondary: #9A9890;
+      --color-text-tertiary:  #5A5855;
+      --color-text-green:   #3D8A68;
+      --color-border-subtle: rgba(255, 255, 255, 0.06);
+      --color-border-gold:  rgba(200, 134, 10, 0.35);
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--color-bg-base);
+      color: var(--color-text-primary);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: var(--color-gold); text-decoration: none; transition: color 200ms ease; }
+    a:hover { color: var(--color-text-green); }
+
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 0.813rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ---- Status bar ---- */
+    .error-status-bar {
+      background-color: rgba(10, 10, 10, 0.96);
+      border-bottom: 1px solid var(--color-border-subtle);
+      padding: 0.5rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .error-status-bar__id { color: var(--color-text-tertiary); font-size: 0.688rem; }
+    .error-status-bar__signal { color: #B53030; font-size: 0.688rem; }
+
+    .status-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background-color: #B53030;
+      margin-right: 0.5rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* ---- Main layout ---- */
+    .error-page {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .error-page__grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--color-border-subtle) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-border-subtle) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.3) 70%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 30%, rgba(0,0,0,0.3) 70%, transparent 100%);
+    }
+
+    .error-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    /* ---- Error panel ---- */
+    .error-panel {
+      background-color: var(--color-bg-surface);
+      border: 1px solid var(--color-border-subtle);
+      border-top: 2px solid #B53030;
+      border-radius: 10px;
+      padding: 3rem 2.5rem;
+      text-align: center;
+    }
+
+    .error-panel__eyebrow {
+      color: var(--color-text-tertiary);
+      margin-bottom: 1.5rem;
+    }
+
+    .error-panel__code {
+      font-family: var(--font-mono);
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 500;
+      color: var(--color-text-primary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .error-panel__code-accent { color: #B53030; }
+
+    .error-panel__title {
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .error-panel__message {
+      font-size: 0.875rem;
+      color: var(--color-text-tertiary);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 44ch;
+      margin-inline: auto;
+    }
+
+    /* ---- Log block ---- */
+    .error-log {
+      background-color: var(--color-bg-elevated);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      text-align: left;
+      margin-bottom: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.688rem;
+      line-height: 1.8;
+      color: var(--color-text-tertiary);
+      overflow-x: auto;
+    }
+
+    .error-log__key { color: var(--color-text-tertiary); }
+    .error-log__val { color: var(--color-text-secondary); }
+    .error-log__val--error { color: #B53030; }
+    .error-log__val--path { color: var(--color-gold-dim); }
+
+    /* ---- Actions ---- */
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: 0.813rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+    }
+
+    .btn--primary {
+      background-color: var(--color-gold);
+      color: #0A0A0A;
+      border-color: var(--color-gold);
+    }
+    .btn--primary:hover {
+      background-color: var(--color-green);
+      border-color: var(--color-green);
+      color: var(--color-text-primary);
+    }
+
+    .btn--ghost {
+      background-color: transparent;
+      color: var(--color-text-primary);
+      border-color: var(--color-border-subtle);
+    }
+    .btn--ghost:hover {
+      border-color: var(--color-green);
+      color: var(--color-text-green);
+    }
+
+    /* ---- Footer ---- */
+    .error-footer {
+      border-top: 1px solid var(--color-border-subtle);
+      padding: 1rem 1.5rem;
+      text-align: center;
+    }
+
+    .error-footer__text {
+      color: var(--color-text-tertiary);
+      font-size: 0.688rem;
+    }
+
+    @media (max-width: 480px) {
+      .error-panel { padding: 2rem 1.25rem; }
+      .error-actions { flex-direction: column; }
+      .btn { justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .status-dot { animation: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="error-status-bar" role="banner">
+    <span class="error-status-bar__id mono">dpugh143 // operational-profile v2.0</span>
+    <span class="error-status-bar__signal mono">
+      <span class="status-dot" aria-hidden="true"></span>
+      resource not found
+    </span>
+  </div>
+
+  <main class="error-page">
+    <div class="error-page__grid-overlay" aria-hidden="true"></div>
+
+    <div class="error-content">
+      <div class="error-panel">
+        <p class="error-panel__eyebrow mono">// error.response</p>
+
+        <p class="error-panel__code">
+          4<span class="error-panel__code-accent">0</span>4
+        </p>
+
+        <h1 class="error-panel__title">Resource Not Found</h1>
+
+        <p class="error-panel__message">
+          The requested path could not be resolved.
+          It may not exist yet, may have moved, or may still be in progress.
+        </p>
+
+        <div class="error-log" role="status" aria-label="Error details">
+          <div><span class="error-log__key">status  </span> <span class="error-log__val--error">404 NOT_FOUND</span></div>
+          <div><span class="error-log__key">path    </span> <span class="error-log__val--path" id="error-path">—</span></div>
+          <div><span class="error-log__key">time    </span> <span class="error-log__val" id="error-time">—</span></div>
+          <div><span class="error-log__key">action  </span> <span class="error-log__val">return to known state</span></div>
+        </div>
+
+        <div class="error-actions">
+          <a href="/dwayne.pugh/" class="btn btn--primary">return to profile</a>
+          <a href="https://github.com/dpugh143/dwayne.pugh" class="btn btn--ghost" target="_blank" rel="noopener">
+            view source
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="error-footer">
+    <p class="error-footer__text mono">
+      © <span id="error-year"></span> Dwayne Pugh // systems engineer · technical educator
+    </p>
+  </footer>
+
+  <script>
+    'use strict';
+    (function () {
+      var pathEl = document.getElementById('error-path');
+      var timeEl = document.getElementById('error-time');
+      var yearEl = document.getElementById('error-year');
+
+      if (pathEl) pathEl.textContent = window.location.pathname;
+
+      if (timeEl) {
+        var now = new Date();
+        var h = String(now.getUTCHours()).padStart(2, '0');
+        var m = String(now.getUTCMinutes()).padStart(2, '0');
+        var s = String(now.getUTCSeconds()).padStart(2, '0');
+        timeEl.textContent = now.toISOString().slice(0, 10) + ' ' + h + ':' + m + ':' + s + ' UTC';
+      }
+
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    })();
+  </script>
+
+</body>
+</html>
