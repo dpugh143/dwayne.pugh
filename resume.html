@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="Dwayne Pugh — Resume. DevOps, SRE, Cloud Infrastructure Engineer and Technical Educator." />
+  <title>Resume | Dwayne Pugh</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/main.css" />
+
+  <style>
+    /* ---- Resume-specific layout ---- */
+    .resume-page {
+      padding-top: calc(28px + 52px + var(--space-12));
+      padding-bottom: var(--space-16);
+    }
+
+    .resume-header {
+      margin-bottom: var(--space-12);
+      padding-bottom: var(--space-8);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .resume-header__eyebrow {
+      color: var(--color-text-tertiary);
+      margin-bottom: var(--space-4);
+    }
+
+    .resume-header__name {
+      font-size: clamp(var(--text-3xl), 4vw, var(--text-5xl));
+      font-weight: var(--weight-light);
+      color: var(--color-text-primary);
+      line-height: var(--leading-tight);
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-2);
+    }
+
+    .resume-header__title {
+      font-size: var(--text-xl);
+      color: var(--color-gold);
+      font-weight: var(--weight-regular);
+      margin-bottom: var(--space-5);
+    }
+
+    .resume-header__contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .resume-header__contact a {
+      color: var(--color-gold);
+    }
+
+    .resume-header__actions {
+      display: flex;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+
+    /* ---- Summary ---- */
+    .resume-summary {
+      font-size: var(--text-base);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
+      max-width: 80ch;
+      margin-bottom: var(--space-12);
+      padding: var(--space-6);
+      background-color: var(--color-bg-surface);
+      border: 1px solid var(--color-border-subtle);
+      border-left: 2px solid var(--color-gold);
+      border-radius: var(--radius-lg);
+    }
+
+    /* ---- Section blocks ---- */
+    .resume-section {
+      margin-bottom: var(--space-12);
+    }
+
+    .resume-section__heading {
+      font-size: var(--text-xl);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--color-border-subtle);
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-3);
+    }
+
+    .resume-section__heading-label {
+      color: var(--color-text-tertiary);
+      font-size: var(--text-sm);
+    }
+
+    /* ---- Experience entries ---- */
+    .exp-entry {
+      background-color: var(--color-bg-surface);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-4);
+      transition: border-color var(--transition-base);
+    }
+
+    .exp-entry:hover {
+      border-color: var(--color-border-gold);
+    }
+
+    .exp-entry__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+
+    .exp-entry__role {
+      font-size: var(--text-lg);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-primary);
+      line-height: var(--leading-snug);
+    }
+
+    .exp-entry__org {
+      font-size: var(--text-sm);
+      color: var(--color-gold);
+    }
+
+    .exp-entry__date {
+      font-size: var(--text-xs);
+      color: var(--color-text-tertiary);
+      white-space: nowrap;
+    }
+
+    .exp-entry__bullets {
+      list-style: none;
+    }
+
+    .exp-entry__bullets li {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
+      padding: var(--space-2) 0;
+      padding-left: var(--space-5);
+      position: relative;
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .exp-entry__bullets li:last-child {
+      border-bottom: none;
+    }
+
+    .exp-entry__bullets li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--color-gold);
+      font-family: var(--font-mono);
+    }
+
+    /* ---- Skills grid ---- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .skill-group {
+      background-color: var(--color-bg-surface);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+    }
+
+    .skill-group__label {
+      color: var(--color-text-tertiary);
+      margin-bottom: var(--space-3);
+    }
+
+    .skill-group__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    /* ---- Education & Certs ---- */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    .edu-entry {
+      background-color: var(--color-bg-surface);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+    }
+
+    .edu-entry__degree {
+      font-size: var(--text-base);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-2);
+      line-height: var(--leading-snug);
+    }
+
+    .edu-entry__school {
+      font-size: var(--text-sm);
+      color: var(--color-gold);
+      margin-bottom: var(--space-1);
+    }
+
+    .edu-entry__year {
+      font-size: var(--text-xs);
+      color: var(--color-text-tertiary);
+    }
+
+    .cert-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+    }
+
+    .cert-tag {
+      display: inline-block;
+      padding: var(--space-2) var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: var(--tracking-wide);
+      color: var(--color-text-green);
+      border: 1px solid var(--color-border-green);
+      border-radius: 20px;
+      background-color: var(--color-green-glow);
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      .exp-entry__header {
+        flex-direction: column;
+      }
+      .edu-grid {
+        grid-template-columns: 1fr;
+      }
+      .resume-header__actions {
+        flex-direction: column;
+      }
+      .btn { justify-content: center; }
+    }
+
+    /* ---- Print styles ---- */
+    @media print {
+      :root {
+        --color-bg-base: #fff;
+        --color-bg-surface: #fff;
+        --color-bg-elevated: #f8f8f8;
+        --color-bg-alt: #fff;
+        --color-text-primary: #111;
+        --color-text-secondary: #333;
+        --color-text-tertiary: #666;
+        --color-gold: #8A5C07;
+        --color-text-green: #1E4D39;
+        --color-border-subtle: #ddd;
+        --color-border-gold: #C8860A;
+        --color-border-green: #2D6A4F;
+        --color-gold-glow: transparent;
+        --color-green-glow: transparent;
+      }
+
+      body { font-size: 11pt; }
+
+      .status-bar,
+      .nav,
+      .footer,
+      .resume-header__actions,
+      .skip-link { display: none !important; }
+
+      .resume-page { padding-top: 0; }
+
+      .resume-header { page-break-after: avoid; }
+
+      .exp-entry { break-inside: avoid; }
+
+      a { color: var(--color-text-primary) !important; text-decoration: none; }
+      a[href^="http"]::after { content: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="#resume-content" class="skip-link">Skip to resume content</a>
+
+  <div class="status-bar" role="banner" aria-label="System status">
+    <div class="status-bar__inner">
+      <span class="status-bar__id mono">dpugh143 // resume v1.0</span>
+      <div class="status-bar__indicators">
+        <span class="status-pill status-pill--green" aria-label="Status">
+          <span class="status-dot" aria-hidden="true"></span>
+          available for opportunities
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav" role="navigation" aria-label="Primary navigation">
+    <div class="nav__inner">
+      <a href="/dwayne.pugh/" class="nav__brand" aria-label="Dwayne Pugh home">
+        <span class="nav__brand-name">Dwayne Pugh</span>
+        <span class="nav__brand-sub mono">// resume</span>
+      </a>
+      <ul class="nav__menu" id="nav-menu" role="list">
+        <li><a href="/dwayne.pugh/" class="nav__link">← back to profile</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="resume-page" id="resume-content">
+    <div class="container">
+
+      <!-- Header -->
+      <header class="resume-header">
+        <p class="resume-header__eyebrow mono">// resume.current</p>
+        <h1 class="resume-header__name">Dwayne Pugh</h1>
+        <p class="resume-header__title">DevOps | SRE | Cloud Infrastructure Engineer</p>
+        <div class="resume-header__contact mono">
+          <span>Sacramento, CA</span>
+          <span>·</span>
+          <a href="mailto:dwayne.pugh@icloud.com">dwayne.pugh@icloud.com</a>
+          <span>·</span>
+          <a href="https://linkedin.com/in/dpugh143" target="_blank" rel="noopener">LinkedIn</a>
+          <span>·</span>
+          <a href="https://github.com/dpugh143" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="resume-header__actions">
+          <button onclick="window.print()" class="btn btn--primary">download / print</button>
+          <a href="/dwayne.pugh/" class="btn btn--ghost">← back to profile</a>
+        </div>
+      </header>
+
+      <!-- Summary -->
+      <div class="resume-summary">
+        DevOps and Site Reliability Engineer with a proven track record of building resilient,
+        scalable platforms for cloud-native and hybrid environments. Adept in Infrastructure as
+        Code, CI/CD automation, and GitOps workflows. Deep experience with AWS, Kubernetes, and
+        observability tooling. Known for driving platform engineering initiatives that reduce toil
+        and deliver secure, self-service infrastructure to development teams. Passionate about
+        automation-first approaches, technical enablement, and cross-team collaboration. Founder
+        of Sankofa Systems — building mental models that last.
+      </div>
+
+      <!-- Experience -->
+      <section class="resume-section">
+        <h2 class="resume-section__heading">
+          Professional Experience
+          <span class="resume-section__heading-label mono">// career.history</span>
+        </h2>
+
+        <div class="exp-entry">
+          <div class="exp-entry__header">
+            <div>
+              <p class="exp-entry__role">DevOps Engineer</p>
+              <p class="exp-entry__org">CA Dept. of Consumer Affairs — Sacramento, CA</p>
+            </div>
+            <span class="exp-entry__date mono">Oct 2024 – Present</span>
+          </div>
+          <ul class="exp-entry__bullets">
+            <li>Lead modernization of enterprise Java applications into OpenShift 4 using ArgoCD, Kustomize, and Jenkins pipelines for fully automated GitOps deployments.</li>
+            <li>Utilize observability stack using Prometheus, Grafana, and Splunk to proactively monitor system health and performance.</li>
+            <li>Contributed to release management rotation, coordinated multi-team deployments, and managed Jira/Bitbucket workflows across environments.</li>
+          </ul>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-entry__header">
+            <div>
+              <p class="exp-entry__role">Agile Project Analyst</p>
+              <p class="exp-entry__org">CA Dept. of Consumer Affairs — Sacramento, CA</p>
+            </div>
+            <span class="exp-entry__date mono">Nov 2022 – Oct 2024</span>
+          </div>
+          <ul class="exp-entry__bullets">
+            <li>Reduced licensing application types by 20% and development time by 60% by optimizing form designs and workflows.</li>
+            <li>Transformed business rules into technical specs and collaborated cross-functionally to ensure requirements were implemented correctly.</li>
+            <li>Facilitated sprint planning, backlog grooming, and QA testing to deliver compliant, on-time releases across multiple bureaus.</li>
+          </ul>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-entry__header">
+            <div>
+              <p class="exp-entry__role">Technical Instructor (SRE/DevOps)</p>
+              <p class="exp-entry__org">Interview Kickstart — Remote</p>
+            </div>
+            <span class="exp-entry__date mono">Jan 2022 – Present</span>
+          </div>
+          <ul class="exp-entry__bullets">
+            <li>Developed and delivered SRE/DevOps trainings including Docker, Kubernetes, deployment strategies, and troubleshooting techniques.</li>
+            <li>Conducted mock interviews and 1:1 coaching for FAANG candidates with a consistent 4.5/5 satisfaction rating.</li>
+            <li>Tailored sessions to up-skill professionals in cloud infrastructure, observability, incident response, and container orchestration.</li>
+          </ul>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-entry__header">
+            <div>
+              <p class="exp-entry__role">Software Engineer II</p>
+              <p class="exp-entry__org">Rivian Automotive — Palo Alto, CA</p>
+            </div>
+            <span class="exp-entry__date mono">May 2021 – Apr 2023</span>
+          </div>
+          <ul class="exp-entry__bullets">
+            <li>Deployed and maintained over 120+ AWS-hosted microservices, enabling secure and efficient operation of customer-facing platforms.</li>
+            <li>Created reusable IaC modules (Terraform) and custom automation scripts to reduce toil and eliminate manual infrastructure tasks.</li>
+            <li>Maintained CI/CD pipelines via Jenkins, conducted PR and Prod Readiness reviews, implemented Flink on EKS, and created end-to-end deployment documentation.</li>
+            <li>Troubleshot production issues with Datadog, Grafana, Prometheus, and Splunk; participated in on-call rotation and root cause analysis.</li>
+          </ul>
+        </div>
+
+        <div class="exp-entry">
+          <div class="exp-entry__header">
+            <div>
+              <p class="exp-entry__role">DevOps Engineer</p>
+              <p class="exp-entry__org">CA Dept. of Consumer Affairs — Sacramento, CA</p>
+            </div>
+            <span class="exp-entry__date mono">Jul 2019 – May 2021</span>
+          </div>
+          <ul class="exp-entry__bullets">
+            <li>Improved deployment cycle time by 75% by upgrading CI/CD pipelines and reducing job count by over 45%.</li>
+            <li>Maintained deployment scripts and coordinated infrastructure changes across UNIX, Windows, and Java environments.</li>
+            <li>Managed enterprise deployments across QA, UAT, and Production; led cross-functional initiatives to enhance automation reliability.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="resume-section">
+        <h2 class="resume-section__heading">
+          Core Competencies
+          <span class="resume-section__heading-label mono">// tech.stack</span>
+        </h2>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <p class="skill-group__label mono">// infrastructure</p>
+            <div class="skill-group__tags">
+              <span class="tag">Terraform</span>
+              <span class="tag">Terragrunt</span>
+              <span class="tag">AWS</span>
+              <span class="tag">Kubernetes</span>
+              <span class="tag">Docker</span>
+              <span class="tag">OpenShift</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <p class="skill-group__label mono">// ci/cd & gitops</p>
+            <div class="skill-group__tags">
+              <span class="tag">GitHub Actions</span>
+              <span class="tag">Jenkins</span>
+              <span class="tag">ArgoCD</span>
+              <span class="tag">Tekton</span>
+              <span class="tag">GitOps</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <p class="skill-group__label mono">// observability</p>
+            <div class="skill-group__tags">
+              <span class="tag">Datadog</span>
+              <span class="tag">Grafana</span>
+              <span class="tag">Prometheus</span>
+              <span class="tag">Splunk</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <p class="skill-group__label mono">// languages & practices</p>
+            <div class="skill-group__tags">
+              <span class="tag">Python</span>
+              <span class="tag">Bash</span>
+              <span class="tag">System Design</span>
+              <span class="tag">Agile</span>
+              <span class="tag">DevSecOps</span>
+              <span class="tag">Incident Response</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education & Certifications -->
+      <section class="resume-section">
+        <h2 class="resume-section__heading">
+          Education & Certifications
+          <span class="resume-section__heading-label mono">// credentials</span>
+        </h2>
+        <div class="edu-grid">
+          <div class="edu-entry">
+            <p class="edu-entry__degree">B.S., Cloud and Systems Administration</p>
+            <p class="edu-entry__school">Western Governors University</p>
+            <p class="edu-entry__year mono">Expected Fall 2026</p>
+          </div>
+          <div class="edu-entry">
+            <p class="edu-entry__degree">A.S., Network Design / Information Security</p>
+            <p class="edu-entry__school">Sacramento City College</p>
+            <p class="edu-entry__year mono">2020</p>
+          </div>
+        </div>
+        <div class="cert-list">
+          <span class="cert-tag">CompTIA Cloud+</span>
+          <span class="cert-tag">CompTIA Project+</span>
+          <span class="cert-tag">LPI Linux Essentials</span>
+          <span class="cert-tag">CIW Site Development Associate</span>
+          <span class="cert-tag">CompTIA A+</span>
+          <span class="cert-tag">ITIL Foundations</span>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__left">
+        <p class="footer__name mono">Dwayne Pugh</p>
+        <p class="footer__tagline">Systems Engineer · Technical Educator</p>
+        <p class="footer__brand mono">
+          Founder, <span class="text--gold">Sankofa Systems</span>
+        </p>
+      </div>
+      <div class="footer__right mono">
+        <p class="footer__copy">© <span id="footer-year"></span> Dwayne Pugh</p>
+        <p class="footer__build">// build: operational-profile v2.0</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    'use strict';
+    (function () {
+      var el = document.getElementById('footer-year');
+      if (el) el.textContent = new Date().getFullYear();
+    })();
+  </script>
+
+</body>
+</html>
