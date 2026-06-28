@@ -661,6 +661,21 @@ strong {
 }
 
 
+/* About section subheadings */
+.about__text h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-4);
+  line-height: var(--leading-snug);
+}
+
+.about__text h3:first-child {
+  margin-top: 0;
+}
+
+
 /* ==========================================================================
    10. Focus Cards
    ========================================================================== */
