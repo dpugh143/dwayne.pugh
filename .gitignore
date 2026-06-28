@@ -1,0 +1,6 @@
+# Source documents — contain PII, signatures, or confidential terms
+assets/*.docx
+assets/*.pptx
+assets/SRE_*.pdf
+assets/devops-sre_resume_*.pdf
+assets/tech-instructor-resume_*
